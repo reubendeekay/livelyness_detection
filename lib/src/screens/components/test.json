@@ -1,0 +1,91 @@
+{
+  "version": "3.1",
+  "screens": [
+    {
+      "id": "RECOMMEND",
+      "title": "DAREMIT",
+      "data": {},
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "Form",
+            "name": "flow_path",
+            "children": [
+              {
+                "type": "TextSubheading",
+                "text": "Which service would you like to do?"
+              },
+              {
+                "type": "RadioButtonsGroup",
+                "label": "Choose service",
+                "name": "recommend_radio",
+                "data-source": [
+                  { "id": "0_Send_money", "title": "Send money" },
+                  { "id": "1_Edit_profile", "title": "Edit profile" }
+                ],
+                "required": true
+              },
+              {
+                "type": "Footer",
+                "label": "Continue",
+                "on-click-action": {
+                  "name": "navigate",
+                  "next": { "type": "screen", "name": "RATE" },
+                  "payload": {
+                    "screen_0_recommend_0": "${form.recommend_radio}"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "RATE",
+      "title": "Send money",
+      "data": {
+        "screen_0_recommend_0": { "type": "string", "__example__": "Example" }
+      },
+      "terminal": true,
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "Form",
+            "name": "flow_path",
+            "children": [
+              {
+                "type": "TextInput",
+                "label": "Phone number",
+                "name": "TextInput_d8fb19",
+                "required": true,
+                "input-type": "text",
+                "helper-text": "Ensure you enter the phone number with the country code eg. +254796660187"
+              },
+              {
+                "type": "DatePicker",
+                "label": "Date of transfer",
+                "required": true,
+                "name": "DatePicker_f7eaee"
+              },
+              {
+                "type": "Footer",
+                "label": "Done",
+                "on-click-action": {
+                  "name": "complete",
+                  "payload": {
+                    "screen_1_TextInput_0": "${form.TextInput_d8fb19}",
+                    "screen_1_DatePicker_1": "${form.DatePicker_f7eaee}",
+                    "screen_0_recommend_0": "${data.screen_0_recommend_0}"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
